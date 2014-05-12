@@ -2,6 +2,7 @@
 .cao-mtc-icon {
 	position: fixed;
 	right: 0;
+	z-index: 999999999;
 }
 .cao-chat-icon {
 	top: 10%;

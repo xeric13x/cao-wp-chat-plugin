@@ -15,6 +15,10 @@
 				<td><input type="text" name="cao_provider_id" value="<?php echo get_option('cao_provider_id'); ?>" /></td>
 			</tr>
 			<tr valign="top">
+				<th scope="row">Do want a chat icon?</th>
+				<td><input type="checkbox" name="cao_display_icon" value="1" <?php echo checked( get_option('cao_display_icon') ); ?> /> <label>Yes</label></td>
+			</tr>
+			<tr valign="top" id="cao-placement-id-wrapper">
 				<th scope="row">Placement ID</th>
 				<td><input type="text" name="cao_placement_id" value="<?php echo get_option('cao_placement_id'); ?>" /></td>
 			</tr>
