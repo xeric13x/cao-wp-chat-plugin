@@ -1,6 +1,6 @@
 <div class="wrap">
 	<h2>Contact At Once Settings</h2>
-
+	<p>Note: In order to use this plugin, you must have an active, eligible Contact At Once! account and know your Merchant ID and Provider ID.</p>
 	<form method="post" action="options.php">
 	<?php wp_nonce_field('update-options'); ?>
 	<?php settings_fields('cao_settings'); ?>
