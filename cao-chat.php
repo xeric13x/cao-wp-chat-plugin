@@ -3,7 +3,7 @@
  * Plugin Name: Contact At Once! Chat
  * Plugin URI: http://contactatonce.com
  * Description: Active Contact At Once! subscribers can easily add their chat and text options to WP sites with this simple plugin.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Contact At Once!
  * Author URI: http://contactatonce.com
  * License: GPL
