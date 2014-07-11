@@ -65,13 +65,13 @@ function display_cao() {
 	if ( $cao_merchant_id != '00000' && $cao_provider_id != '0') {
 		// Check for placement code for chat icon
 		if ( $cao_placement_id != '0' && $cao_display_icon) {
-			echo '<div class="cao-chat-icon"><a onclick="javascript:window.open(\'http://dm5.contactatonce.com/CaoClientContainer.aspx?MerchantId='. $cao_merchant_id . '&amp;Providerid=' . $cao_provider_id . '&amp;PlacementId=' . $cao_placement_id . '&amp;OriginationUrl=\'+encodeURIComponent(location.href),\'\',\'resizable=yes,toolbar=no,menubar=no,location=no,scrollbars=no,status=no,height=400,width=600\');return false;" href="#"><img onerror="this.height=0;this.width=0" src="http://dm5.contactatonce.com/getagentstatusimage.aspx?MerchantId=' . $cao_merchant_id . '&amp;ProviderId=' . $cao_provider_id .'&amp;PlacementId=' . $cao_placement_id . '" border="0" /></a></div>' . PHP_EOL;
+			echo '<div class="cao-chat-icon"><a onclick="javascript:window.open(\'//dm5.contactatonce.com/CaoClientContainer.aspx?MerchantId='. $cao_merchant_id . '&amp;Providerid=' . $cao_provider_id . '&amp;PlacementId=' . $cao_placement_id . '&amp;OriginationUrl=\'+encodeURIComponent(location.href),\'\',\'resizable=yes,toolbar=no,menubar=no,location=no,scrollbars=no,status=no,height=400,width=600\');return false;" href="#"><img onerror="this.height=0;this.width=0" src="//dm5.contactatonce.com/getagentstatusimage.aspx?MerchantId=' . $cao_merchant_id . '&amp;ProviderId=' . $cao_provider_id .'&amp;PlacementId=' . $cao_placement_id . '" border="0" /></a></div>' . PHP_EOL;
 		}
 
 		// Check for dropin
 		if ( $cao_has_dropin ) {
-			echo	'<script language="JavaScript" src="http://dm5.contactatonce.com/scripts/PopIn.js" type="text/javascript"></script>' . PHP_EOL .
-					'<script language="JavaScript" src="http://dm5.contactatonce.com/PopInGenerator.aspx?MerchantId=' . $cao_merchant_id . '&amp;ProviderId=' . $cao_provider_id . '&amp;PlacementId=0" type="text/javascript"></script>' . PHP_EOL;
+			echo	'<script language="JavaScript" src="//dm5.contactatonce.com/scripts/PopIn.js" type="text/javascript"></script>' . PHP_EOL .
+					'<script language="JavaScript" src="//dm5.contactatonce.com/PopInGenerator.aspx?MerchantId=' . $cao_merchant_id . '&amp;ProviderId=' . $cao_provider_id . '&amp;PlacementId=0" type="text/javascript"></script>' . PHP_EOL;
 			echo <<<JS
 				<script language="JavaScript">
 					if (!bowser.mobile) {
@@ -88,7 +88,7 @@ JS;
 
 		// Check for MTC
 		if ( $cao_has_mtc ) {
-			echo '<div class="cao-mtc-icon"><a onclick="javascript:window.open(\'http://mtc.contactatonce.com/MobileTextConnectConversationInitiater.aspx?MerchantId=' . $cao_merchant_id . '&ProviderId=' . $cao_provider_id . '&PlacementId=34\',\'\',\'resizable=yes,toolbar=no,menubar=no,location=no,scrollbars=no,status=no,height=350,width=410\');return false;" href="#"><img src="http://cdn.contactatonce.com/dropin/TruePrice2MTCIcon.png" border="0" /></a></div>' . PHP_EOL;
+			echo '<div class="cao-mtc-icon"><a onclick="javascript:window.open(\'//mtc.contactatonce.com/MobileTextConnectConversationInitiater.aspx?MerchantId=' . $cao_merchant_id . '&ProviderId=' . $cao_provider_id . '&PlacementId=34\',\'\',\'resizable=yes,toolbar=no,menubar=no,location=no,scrollbars=no,status=no,height=350,width=410\');return false;" href="#"><img src="//cdn.contactatonce.com/mobile/WPMTCIcon_06.png" border="0" /></a></div>' . PHP_EOL;
 			echo <<<JS
 				<script type="text/javascript">
 					var wth = jQuery.noConflict();
@@ -111,7 +111,7 @@ JS;
 
 		// Check for social media bar
 		if ( $cao_has_social_media_bar ) {
-			echo '<script type="text/javascript" src="http://toolbar.contactatonce.com/ToolbarGenerator.aspx?MerchantId=' . $cao_merchant_id . '&amp;ProviderId=' . $cao_provider_id . '"></script>' . PHP_EOL;
+			echo '<script type="text/javascript" src="//toolbar.contactatonce.com/ToolbarGenerator.aspx?MerchantId=' . $cao_merchant_id . '&amp;ProviderId=' . $cao_provider_id . '"></script>' . PHP_EOL;
 		}
 	}
 }
