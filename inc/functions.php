@@ -1,45 +1,63 @@
 <?php
+echo plugin_dir_url( __FILE__ );
+//Check for already active plugin
+function check_plugin_active() {
+	return is_plugin_active( CAO_CHAT_PLUGIN_BASENAME );
+}
+
 // Add CAO! options groupo upon activation of plugin
 function activate_cao() {
-	add_option( 'cao_merchant_id', '00000' );
-	add_option( 'cao_provider_id', '0' );
-	add_option( 'cao_display_icon', 0 );
-	add_option( 'cao_placement_id', '0' );
-	add_option( 'cao_has_dropin', 0 );
-	add_option( 'cao_has_mtc', 0 );
-	add_option( 'cao_has_social_media_bar', 0 );
+	$opt_names = unserialize( CAO_CHAT_OPTION_NAMES );
+	$opt_arr = array();
+
+	if ( check_plugin_active() && get_plugin_data( CAO_CHAT_PLUGIN_DIR . 'cao-chat.php' )['Version'] == '1.0.1' ) {
+		foreach ($opt_names as $k => $v) {
+			echo $k . ' : ' . $v . '<br>';
+			if ( $k == 'has_dropin' ) { // Do not delete. Legacy code fix
+				$opt_arr['cao_pop_in_type'] = get_option( $k ) == 1 ? '1' : '0';
+			} else {
+				$opt_arr[$v] = get_option( $opt_names[$k] );
+			}
+		}
+	} else {
+		$opt_arr['cao_merchant_id'] = '00000';
+		$opt_arr['cao_provider_id'] = '0';
+		$opt_arr['cao_display_icon'] = 0;
+		$opt_arr['cao_placement_id'] = '0';
+		$opt_arr['cao_pop_in_type'] = '0';
+		$opt_arr['cao_has_mtc'] = 0;
+		$opt_arr['cao_has_social_media_bar'] = 0;
+	}
+
+	add_option( serialize( $opt_arr ) );
 }
 
 // Delete CAO! options groupo upon activation of plugin
 function deactivate_cao() {
-	delete_option( 'cao_merchant_id' );
-	delete_option( 'cao_provider_id' );
-	delete_option( 'cao_display_icon' );
-	delete_option( 'cao_placement_id' );
-	delete_option( 'cao_has_dropin' );
-	delete_option( 'cao_has_mtc' );
-	delete_option( 'cao_has_social_media_bar' );
+	$opt_names = unserialize(CAO_CHAT_OPTION_NAMES);
+
+	foreach ($opt_names as $name) {
+		delete_option( $name );
+	}
 }
 
 // Register options
 function cao_admin_init() {
-	register_setting( 'cao_settings', 'cao_merchant_id' );
-	register_setting( 'cao_settings', 'cao_provider_id' );
-	register_setting( 'cao_settings', 'cao_display_icon' );
-	register_setting( 'cao_settings', 'cao_placement_id' );
-	register_setting( 'cao_settings', 'cao_has_dropin' );
-	register_setting( 'cao_settings', 'cao_has_mtc' );
-	register_setting( 'cao_settings', 'cao_has_social_media_bar' );
+	$opt_names = unserialize(CAO_CHAT_OPTION_NAMES);
+
+	foreach ($opt_names as $name) {
+		register_setting( 'cao_settings', $name );
+	}
 }
 
 // Add settings page
 function cao_menu_settings() {
-	add_options_page( WTH_COMPANY_NAME . ' Chat Settings', WTH_COMPANY_NAME, 'manage_options', 'cao-chat', 'cao_chat_settings');
+	add_options_page( CAO_CHAT_COMPANY_NAME . ' Chat Settings', CAO_CHAT_COMPANY_NAME, 'manage_options', 'cao-chat', 'cao_chat_settings');
 }
 
 // Call settings page
 function cao_chat_settings() {
-	include( plugin_dir_path( __FILE__ ) . 'settings-page.php' );
+	include( plugins_url( plugin_dir_url( __FILE__ ) . '/inc/settings-page.php', dirname( __FILE__ ) ) );
 }
 
 function admin_cao_scripts_n_styles() {
@@ -54,13 +72,15 @@ function cao_scripts_n_styles() {
 
 // Creat chat code
 function display_cao() {
-	$cao_merchant_id = get_option( 'cao_merchant_id' );
-	$cao_provider_id = get_option( 'cao_provider_id' );
-	$cao_display_icon = get_option( 'cao_display_icon' );
-	$cao_placement_id = get_option( 'cao_placement_id' );
-	$cao_has_dropin = get_option( 'cao_has_dropin' );
-	$cao_has_mtc = get_option( 'cao_has_mtc' );
-	$cao_has_social_media_bar = get_option( 'cao_has_social_media_bar' );
+	$opt_names = unserialize(CAO_CHAT_OPTION_NAMES);
+
+	$cao_merchant_id = get_option( $opt_names['mid'] );
+	$cao_provider_id = get_option( $opt_names['pid'] );
+	$cao_display_icon = get_option( $opt_names['display_icon'] );
+	$cao_placement_id = get_option( $opt_names['placement_id'] );
+	$cao_has_dropin = get_option( $opt_names['has_dropin'] );
+	$cao_has_mtc = get_option( $opt_names['has_mtc'] );
+	$cao_has_social_media_bar = get_option( $opt_names['has_social_media_bar'] );
 	// Check for Merchant ID && Provider ID before placing code
 	if ( $cao_merchant_id != '00000' && $cao_provider_id != '0') {
 		// Check for placement code for chat icon
