@@ -16,15 +16,15 @@ ini_set('display_errors', 1);
 define( 'CAO_CHAT_COMPANY_NAME', 'Contact At Once!' );
 define( 'CAO_CHAT_PLUGIN_DIR', ABSPATH . 'wp-content/plugins/cao-wp-chat-plugin/');
 define( 'CAO_CHAT_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
-define( 'CAO_CHAT_OPTION_NAMES', serialize(array(
+define( 'CAO_CHAT_OPTION_NAME', 'cao_chat');
+define( 'CAO_CHAT_OPTION_NAMES', serialize( array(
 	'mid' => 'cao_merchant_id',
 	'pid' => 'cao_provider_id',
 	'display_icon' => 'cao_display_icon',
 	'placement_id' => 'cao_placement_id',
 	'has_dropin' => 'cao_has_dropin',
-	'pop_in_type' => 'cao_pop_in_type',
 	'has_mtc' => 'cao_has_mtc',
-	'has_social_media_bar' => 'cao_has_social_media_bar',
+	'has_social_media_bar' => 'cao_has_social_media_bar'
 ) ) );
 
 
