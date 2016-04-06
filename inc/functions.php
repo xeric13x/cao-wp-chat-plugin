@@ -11,7 +11,6 @@ function activate_cao() {
 
 	if ( check_plugin_active() && get_option( 'cao_merchant_id' ) != null ) {
 		foreach ($opt_names as $k => $v) {
-			echo $k . ' : ' . $v . '<br>';
 			$opt_arr[$v] = get_option( $opt_names[$k] );
 		}
 	} else {
@@ -24,12 +23,14 @@ function activate_cao() {
 		$opt_arr['has_social_media_bar'] = 0;
 	}
 
+	$opt_arr['mtc_icon'] = 'MultiFamilyIcon_MTC_LightGray.png';
+
 	add_option( CAO_CHAT_OPTION_NAME, $opt_arr );
 }
 
-// Delete CAO! options groupo upon activation of plugin
+// Delete CAO! options groupo upon deactivation of plugin
 function deactivate_cao() {
-	delete_option( CAO_CHAT_OPTION_NAME );
+	// delete_option( CAO_CHAT_OPTION_NAME );
 }
 
 // Register options
@@ -48,7 +49,9 @@ function cao_chat_settings() {
 }
 
 function admin_cao_scripts_n_styles() {
-	wp_enqueue_script( 'cao-chat-admin', plugins_url( '/assets/js/cao-admin.js', dirname( __FILE__ ) ) );
+	wp_enqueue_style( 'cao-admin', plugins_url( '/assets/css/cao-admin.css', dirname( __FILE__ ) ) );
+	wp_enqueue_script( 'cao-chat-admin', plugins_url( '/assets/js/cao-admin.js', dirname( __FILE__ ) ), array( 'jquery-cao-radio-selector' ) );
+	wp_enqueue_script( 'jquery-cao-radio-selector', plugins_url( '/assets/js/jquery.cao-radioSelector.js', dirname( __FILE__ ) ), array( 'jquery' ) );
 }
 
 function cao_scripts_n_styles() {
@@ -67,6 +70,7 @@ function display_cao() {
 	$placement_id = $opt_names['placement_id'];
 	$has_dropin = $opt_names['has_dropin'];
 	$has_mtc = $opt_names['has_mtc'];
+	$mtc_icon = $opt_names['mtc_icon'];
 	$has_social_media_bar = $opt_names['has_social_media_bar'];
 	// Check for Merchant ID && Provider ID before placing code
 	if ( $mid != '00000' && $pid != '0') {
@@ -95,7 +99,7 @@ JS;
 
 		// Check for MTC
 		if ( $has_mtc ) {
-			echo '<div class="cao-mtc-icon"><a onclick="javascript:window.open(\'//mtc.contactatonce.com/MobileTextConnectConversationInitiater.aspx?MerchantId=' . $mid . '&ProviderId=' . $pid . '&PlacementId=31\',\'\',\'resizable=yes,toolbar=no,menubar=no,location=no,scrollbars=no,status=no,height=350,width=410\');return false;" href="#"><img src="//dm5.contactatonce.com/getagentstatusimage.aspx?MerchantId=' . $mid . '&amp;ProviderId=' . $pid .'&amp;PlacementId=31" border="0" /></a></div>' . PHP_EOL;
+			echo '<div class="cao-mtc-icon"><a onclick="javascript:window.open(\'//mtc.contactatonce.com/MobileTextConnectConversationInitiater.aspx?MerchantId=' . $mid . '&ProviderId=' . $pid . '&PlacementId=31\',\'\',\'resizable=yes,toolbar=no,menubar=no,location=no,scrollbars=no,status=no,height=350,width=410\');return false;" href="#"><img src="http://cdn.contactatonce.com/mobile/' . $mtc_icon . '" border="0" /></a></div>' . PHP_EOL;
 			echo <<<JS
 				<script type="text/javascript">
 					var wth = jQuery.noConflict();

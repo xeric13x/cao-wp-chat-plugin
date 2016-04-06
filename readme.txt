@@ -37,5 +37,9 @@ N/A
 
 == Upgrade Notice ==
 
+= 1.1.0
+	Serialized Options instead of many rows
+	Removed default MTC icon for MTC icon picker
+
 = 1.0.0 =
 	N/A

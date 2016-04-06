@@ -1,0 +1,20 @@
+.cao-radio-group span {
+	display: inline-block;
+	vertical-align: top;
+	padding: 6px;
+	border: 1px solid transparent;
+}
+
+.cao-radio-group span label {
+	display: block;
+	width: 39px;
+	height: 100px;
+}
+.cao-radio-group .cao-selected {
+	background: rgba(0,0,0,0.15);
+	border-radius: 10px 0 0 10px;
+	border: 1px solid rgba(0,0,0,0.1);
+	-webkit-box-shadow: inset 0px 0px 7px 1px rgba(0,0,0,0.1);
+	-moz-box-shadow: inset 0px 0px 7px 1px rgba(0,0,0,0.1);
+	box-shadow: inset 0px 0px 7px 1px rgba(0,0,0,0.1);
+}

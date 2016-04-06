@@ -11,5 +11,7 @@
 			}
 		});
 		$('input[name*=display_icon]').trigger('change');
+
+		$('.cao-radio-group').radioSelector();
 	});
 })(jQuery);
