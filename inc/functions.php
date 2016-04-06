@@ -1,17 +1,12 @@
 <?php
-//Check for already active plugin
-function check_plugin_active() {
-	return is_plugin_active( CAO_CHAT_PLUGIN_BASENAME );
-}
-
-// Add CAO! options groupo upon activation of plugin
-function activate_cao() {
+function cao_create_option() {
 	$opt_names = unserialize( CAO_CHAT_OPTION_NAMES );
 	$opt_arr = array();
 
-	if ( check_plugin_active() && get_option( 'cao_merchant_id' ) != null ) {
+	if ( get_option( 'cao_merchant_id' ) != null ) {
 		foreach ($opt_names as $k => $v) {
-			$opt_arr[$v] = get_option( $opt_names[$k] );
+			$opt_arr[$k] = get_option( $opt_names[$k] );
+			delete_option( $opt_names[$k] );
 		}
 	} else {
 		$opt_arr['mid'] = '00000';
@@ -26,6 +21,11 @@ function activate_cao() {
 	$opt_arr['mtc_icon'] = 'MultiFamilyIcon_MTC_LightGray.png';
 
 	add_option( CAO_CHAT_OPTION_NAME, $opt_arr );
+}
+
+// Add CAO! options groupo upon activation of plugin
+function activate_cao() {
+	cao_create_option();
 }
 
 // Delete CAO! options groupo upon deactivation of plugin

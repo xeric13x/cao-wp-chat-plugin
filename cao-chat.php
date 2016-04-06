@@ -1,5 +1,6 @@
 <?php
 /**
+ * Contributors: xeric13x
  * Plugin Name: Contact At Once! Chat
  * Plugin URI: http://contactatonce.com
  * Description: Active Contact At Once! subscribers can easily add their chat and text options to WP sites with this simple plugin.
@@ -14,7 +15,7 @@ ini_set('display_errors', 1);
 
 // Define constants
 define( 'CAO_CHAT_COMPANY_NAME', 'Contact At Once!' );
-define( 'CAO_CHAT_PLUGIN_DIR', ABSPATH . 'wp-content/plugins/cao-wp-chat-plugin/');
+define( 'CAO_CHAT_PLUGIN_DIR', ABSPATH . 'wp-content/plugins/contact-at-once-chat/');
 define( 'CAO_CHAT_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 define( 'CAO_CHAT_OPTION_NAME', 'cao_chat');
 define( 'CAO_CHAT_OPTION_NAMES', serialize( array(
@@ -44,4 +45,8 @@ if ( is_admin() ) {
 if ( !is_admin() ) {
 	add_action( 'wp_footer', 'display_cao' );
 	add_action( 'wp_enqueue_scripts', 'cao_scripts_n_styles' );
+}
+
+if ( get_option( 'cao_merchant_id' ) != null ) {
+	activate_cao();
 }
